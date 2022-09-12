@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="1lab.js"></script> <!-- Привязала сторонний файл-->
+    <link href="1lab.css" rel="stylesheet" type="text/css"> <!-- Привязала сторонний файл-->
+    <title>Hometask</title>
+</head>
+
+<body>
+    <h1> Homework №1</h1>
+    <div ng-app="myModule" ng-controller="ModValue" > <!-- Привязка данных -->
+        <div>
+            <div>
+            <input type="number" ng-model="value" placeholder="Enter your number"> <!-- Блок ввода для записи числа пользователем-->
+            <button type="button" ng-click="Multiplication()">Go!</button> <!-- При нажатии на кнопку выполняется функция-->   
+            </div>
+        </div>
+          <table>
+            <thead >
+              <tr>
+                <th scope="col" class="th1 coll" ng-repeat="item in array">{{item}}</th> <!-- Отображение исходного массива-->
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="newItem in objNewArray">
+                <th scope="row" class="th2 coll" ng-repeat="Item in newItem"> {{Item}}</th> <!-- Отображение полученного массива-->              
+              </tr>          
+            </tbody>
+          </table>
+    </div>
+</body>
+</html>
