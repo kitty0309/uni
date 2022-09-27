@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl" style="margin: 4vw;">
+
+	<h3>Заполните форму, чтобы стать абитуриентом!</h3>
+    
+    <br>
+
+	<form>
+	<p>Фамилия: <input type="text" ng-model="surname"></p>
+	<p>Имя: <input type="text" ng-model="name"></p>
+    <p>Дата рождения: <input type="date" ng-model="dateBirth"></p>
+    <p>Пол: <br>
+    	<input type="radio" name="sex" value="fem"> Женский
+        <input type="radio" name="sex" value="mas"> Мужской
+    </p>
+
+    <p>Образование: 
+    	<select ng-model="educType">
+ 			<option name="educ" value="школьное">Школа</option>
+  			<option name="educ" value="неоконченное высшее">Лиценциат</option>
+            <option name="educ" value="высшее">Магистратура</option>
+            <option name="educ" value="высшее">Докторантура</option>
+		</select>
+	</p>
+    
+    <!-- блок отображается только если выбран мастер или Доктор -->
+    <div ng-show="educType == 'высшее'" >
+    	<p>Заработная плата: <input type="text" ng-model="salary" ng-click="zp = true"></p>
+    </div>
+    
+    <br>
+    
+    <!--кнопки-->
+    <input type="submit" class="btn btn-default" ng-click="showInfo = true" value="Согласен">
+    <input type="reset" class="btn btn-default" value="Отказ">
+		</form>
+
+	<br><br>
+    
+    <div ng-show="showInfo">
+    	<h3>О Вас:</h3>
+		<p>{{ surname + " " + name + ", " }}{{ dateBirth | date : "dd.MM.yyyy" }}{{ ", получил(a) " + educType + " образование."}}</p>
+    <div ng-show="zp">
+        <p>{{"В данный момент получает " + salary + " в месяц."}}</p>
+    </div>
+    </div>
+
+<script>
+	var app = angular.module('myApp', []);
+	app.controller('myCtrl', function($scope) {
+    		
+	});
+</script>
+
+</body>
+</html>

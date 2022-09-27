@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="2lab.js"></script> <!-- Привязала сторонний файл-->
+    <title>Hometask №2</title>
+    <style>
+    .img{
+    width:10px;
+    }
+    </style>
+</head>
+<div ng-app="myModule" ng-controller="Square" >  <!-- Установление связи с приложением и контроллером-->
+<input type="number" ng-model="num" placeholder="Enter your number"><!-- Привязка к типу данных -->
+<button type="button" ng-click="save_num()"><input type="image" class="img" 
+    src="strelka-vpered.png" /></button> <!-- Привязка к функции при нажатии на кнопку --> 
+<div> {{new_num}} </div> <!--Отображение результата возведения в квадрат-->
+</div>
+</body>
+</html>
