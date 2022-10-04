@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html ng-app="football_player" ng-controller="footballController">
+<head>
+<meta charset="utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+td {
+    width: 130px;
+}
+
+td.b {
+    width: 300px;
+    height:40px;
+}
+.error {
+    color:red;
+}
+img {
+    width:30%;
+    border-radius: 8px;
+    position: absolute;
+    right: 10px;
+}
+
+div.b{
+    position: absolute;
+    right: 10px;
+    top:450px;
+}
+
+input.ng-invalid {
+    background-color:pink;
+}
+
+</style>
+</head>
+<body >
+    <div class="page-header">
+        <h2 style="margin: 0 0 0 5px">Список футболистов</h2>
+    </div>
+    <div id="divID" ng-init="imgsrc='c5c76407.jpg'" ng-mouseover="imgsrc='10815832.jpg'" ng-mouseout="imgsrc='c5c76407.jpg'"> <!--дополнительное событие-->
+        <img ng-src="{{imgsrc}}"/>
+    </div>
+
+    <form  method="post" name="myForm"><!--форма-->
+        <label>Имя игрока:</label></br>
+        <input  type="text" name="name1" ng-model="name1" placeholder="Имя игрока" required/> <span class="error" ng-show="myForm.name1.$dirty"><span class="error" ng-show="myForm.name1.$error.required"> Необходимо ввести имя.</span></span></br></br><!--событие+валидация-->
+
+        <label>В какой команде играет:</label></br><!--список+массив+селект-->
+        <select ng-model="team1" value="Клуб">
+            <option value="" disabled selected hidden>Клуб</option>
+            <option  ng-repeat="x in football"  >{{x.club}}</option>
+        </select>
+
+        </br></br><label>Гражданство: </label> </br><!--список+массив+радио кнопки-->
+        <table class="table-responsive">
+            <tr >
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[0].country}}"/> {{football[0].country}}</td> 
+                <td>    <input type="radio" name="country" ng-model="country1" value="{{football[1].country}}"/> {{football[1].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[2].country}}"/> {{football[2].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[3].country}}"/> {{football[3].country}}</td>
+                
+            </tr>
+            <tr>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[4].country}}"/> {{football[4].country}}</td> 
+                <td>    <input type="radio" name="country" ng-model="country1" value="{{football[5].country}}"/> {{football[5].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[6].country}}"/> {{football[6].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[7].country}}"/> {{football[7].country}}</td>
+                
+            </tr>
+            <tr>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[8].country}}"/> {{football[8].country}}</td> 
+                <td>    <input type="radio" name="country" ng-model="country1" value="{{football[9].country}}"/> {{football[9].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[10].country}}"/> {{football[10].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[11].country}}"/> {{football[11].country}}</td>
+                
+            </tr>
+            <tr>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[12].country}}"/> {{football[12].country}}</td> 
+                <td>    <input type="radio" name="country" ng-model="country1" value="{{football[13].country}}"/> {{football[13].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[14].country}}"/> {{football[14].country}}</td>
+                <td>   <input type="radio" name="country" ng-model="country1" value="{{football[15].country}}"/> {{football[15].country}}</td>    
+            </tr>
+        </table>
+
+        
+        </br><label>Пол: </label></br><!--радио кнопка-->
+            <input type="radio"  ng-model="sex1" value="male" > Мужской
+            </br><input type="radio"  ng-model="sex1" value="female" > Женский
+
+        </br></br><label>Семейное положение: </label></br><!--переключатель-->
+        <input type="checkbox" />Женат/замужем</br>
+        <input type="checkbox" />Холост/не замужем</br>
+        <input type="checkbox" />Разведен/ разведена</br></br>
+
+        <table class="table-responsive">
+
+            <tr>
+                <th class="b">  Какой возраст игрока:</td> 
+                <th class="b">  Зарплата:</td>
+            </tr>
+
+            <tr>
+                <td class="b">   <input  type="number" min="0" ng-model="age1" placeholder="Возраст"  required /><span class="error" ng-show="myForm.age1.$dirty"><span class="error" ng-show="myForm.age1.$error.required || age1 > 35"></span></span> </td> <!--инпут+проверка валидации-->
+                <td class="b">   <input  type="number" min="0" ng-model="salary1" placeholder="Зарплата" ng-disabled="age1>35"  required /><span class="error" ng-show="myForm.salary1.$dirty"><span class="error" ng-show="myForm.salary1.$error.required"></span></span></td><!--инпут+проверка валидации-->
+            </tr>
+
+            
+                <td class="b">   <span ng-show="age1 > 35" class="error">К сожалению, набор уже закончен!</span></td><!--проверка условия+ событие-->
+                <td class="b">   <span ng-show="salary1<1000" class="error" >К сожалению, набор уже закончен!</span></span> </td><!--проверка условия+ событие-->
+                   
+        </table>
+        
+        <div>
+        </br>
+        <input type="reset" class="btn btn-default" value="Очистить">
+        <button class="btn btn-default" ng-click="new_player(name1, team1, country1, age1)" ng-disabled="age1>35 || salary1>100000 || !name1 || !country1">Добавить</button><!--проверка условия (изменила условие зарплаты, поставила не 10 тысяч, а 100 тысяч)+ событие-->
+        </div>
+
+    </form>  
+    
+     <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Имя</th>
+                    <th>Клуб</th>
+                    <th>Страна</th>
+                    <th>Возраст</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in player"><!--массив-->
+                    <td>{{x.name}}</td>
+                    <td>{{x.team}}</td>
+                    <td>{{x.country}}</td>
+                    <td>{{x.age}}</td>
+                </tr>
+                
+            </tbody>
+        </table>
+<script>
+angular.module('football_player', []).controller('footballController', function($scope) {   		
+$scope.player=[{ name: 'Криштиану Рональдо', team:'Манчестер Юнайтед', country:'Португалия', age:'35'} ]
+
+//функция добавления элемента в массив
+$scope.new_player = function (name1, team1, country1, age1 ) {
+    age1 = parseFloat(age1); // преобразуем введенное значение к числу
+    if(name1 != "" && country1 != "") {
+        $scope.player.push({ name: name1, team: team1, country: country1, age: age1});
+        }
+    }
+$scope.football = [
+        { club: '-----------', country:"Испания" }, 
+        { club: 'Реал Мадрид', country:"Португалия"  },
+        { club: 'Манчествер Юнайтед', country:"Франция"  },
+        { club: 'Бавария', country:"Бразилия"  },
+        { club: 'Барселона', country:"Великобритания"  },
+        { club: 'Сантос', country:"Германияя"  },
+        { club: 'Аякс', country:"Украина"  },
+        { club: 'Ювентус' , country:"Польша" },
+        { club: 'Ливерпуль', country:"Италия"  },
+        { club: 'Милан', country:"Россия" },
+        { club: 'Интер' , country:"Швеция" },
+        { club: 'Боруссия' , country:"Ирландия" },
+        { club: 'Чесли' , country:"ЮАР" },
+        { club: 'Пари Сен-Жермен' , country:"Чехия" },
+        { club: 'Динамо' , country:"Венгрия" },
+        { club: 'ЦСКА' , country:"Египет" }
+            ]
+    
+    
+
+});
+//});
+</script>
+</body>
+</html>
